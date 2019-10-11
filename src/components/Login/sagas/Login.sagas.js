@@ -11,12 +11,24 @@ import { loginRequestSuccess, loginRequestFail } from "../actions";
 
 function* saveUserSession() {}
 
-function* sendAuthorizationRequest() {
-  console.log("works");
-
+function* sendAuthorizationRequest(action) {
   try {
-    const response = yield call(fetch, ORIGIN);
-    yield console.log(response);
+    const { email, password } = action.payload;
+
+    const response = yield call(fetch, `${ORIGIN}/login`, {
+      method: "POST",
+      credentials: "include",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+      body: {
+        email,
+        password
+      }
+    });
+
+    yield console.log(response, response.body);
 
     yield put(loginRequestSuccess());
     yield fork(saveUserSession);
