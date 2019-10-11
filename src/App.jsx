@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 import {HOME, LOGIN} from './constants';
-  
+
 import Home from './components/Home';
 import Login from './components/Login';
 import NotFound from './components/NotFound'
@@ -15,26 +15,17 @@ import NotFound from './components/NotFound'
 import withAuth from './helpers'
 
 const App = () => {
-  const history = useHistory();
+  // const history = useHistory();
   return (
     <Router>
-      <button onClick={() => history.push('hello')} >click</button>
       <Switch>
-        <Route 
-          exact
-          path={HOME}
-          children={withAuth(Home)}
-        ><Home /></Route>
-        <Route 
-          exact
-          path={LOGIN}
-          children={Login}
-        />
-        <Route 
-          children={NotFound}
-        />
+        <Route exact path={HOME} component={withAuth(Home)} />
+        <Route exact path={LOGIN} component={Login}/>
+        <Route component={NotFound} />
       </Switch>
+
     </Router>
   )
-}
+};
+
 export default App;
