@@ -19,7 +19,7 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path={HOME} component={withAuth(Home)} />
+        <Route exact path={HOME} component={Home} />
         <Route exact path={LOGIN} component={Login}/>
         <Route component={NotFound} />
       </Switch>

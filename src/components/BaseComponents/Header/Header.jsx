@@ -1,14 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import './styles/Header.styles.css';
 
-
-const Header = props => {
-    return (
-        <div>
-            <p>Header</p>
-        </div>
-    )
-
-}
+const Header = () => {
+  return (
+    <div className='main-header'>
+      <div className='main-header__logo'>CloneDesk</div>
+    </div>
+  )
+};
 
 export default Header;

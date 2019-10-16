@@ -1,0 +1,18 @@
+.default-page {
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.default-page__content-wrapper {
+  flex: 1;
+}
+
+.default-page__footer-wrapper {
+  height: 40px;
+}
+
+.default-page__header-wrapper {
+  height: 50px;
+}

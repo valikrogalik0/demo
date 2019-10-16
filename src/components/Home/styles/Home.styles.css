@@ -1,0 +1,17 @@
+.home-page {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.home-page__side-bar {
+  max-width: 220px;
+  min-width: 220px;
+  height: 100%;
+  background-color: #2b3643;
+  padding-top: 20px;
+}
+
+.home-page__content {
+  padding: 10px;
+}
