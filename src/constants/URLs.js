@@ -1,1 +1,1 @@
-export const ORIGIN = "https://test.clonedesk.com";
+export const ORIGIN = "https://test-api.clonedesk.com/api/v2/";

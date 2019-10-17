@@ -13,6 +13,7 @@ export const loginRequestSuccess = () => ({
   type: LOGIN_REQUEST_SUCCESS
 });
 
-export const loginRequestFail = () => ({
-  type: LOGIN_REQUEST_FAIL
+export const loginRequestFail = error => ({
+  type: LOGIN_REQUEST_FAIL,
+  payload: error,
 });

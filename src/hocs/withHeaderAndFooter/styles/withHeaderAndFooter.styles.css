@@ -1,0 +1,17 @@
+.default-page {
+  height: 100%;
+  position: relative;
+}
+
+.default-page__footer-wrapper {
+  height: 40px;
+}
+
+.default-page__content-wrapper {
+  min-height: calc(100% - 50px - 40px);
+  display: flex;
+}
+
+.default-page__header-wrapper {
+  height: 50px;
+}

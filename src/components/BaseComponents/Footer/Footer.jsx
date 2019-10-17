@@ -1,12 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import './styles/Footer.styles.css'
 
-const Footer = props => {
-    return(
-        <div>
-            <p>Footer</p>
-        </div>
-    )
-}
+const Footer = () => {
+  return(
+    <div className='main-footer'>
+      <div className='main-footer__copyright'>2020 &copy; CloneDesk</div>
+    </div>
+  )
+};
 
 export default Footer;

@@ -1,39 +1,46 @@
 import { call, put, fork, takeEvery } from "redux-saga/effects";
-
-import {
-  LOGIN_REQUEST,
-  LOGIN_REQUEST_SUCCESS,
-  LOGIN_REQUEST_FAIL
-} from "../constants";
-import { ORIGIN } from "../../../constants";
-
+import { push } from 'connected-react-router'
+import { LOGIN_REQUEST } from "../constants";
+import { ORIGIN } from "../../../constants/URLs";
+import { HOME } from '../../../constants/Routes';
+import getFormDataFromPayload from '../../../helpers/getFormDataFromPayload';
 import { loginRequestSuccess, loginRequestFail } from "../actions";
 
-function* saveUserSession() {}
+function saveUserSession(authSession) {
+  localStorage.setItem('auth_session', authSession);
+}
+
+function fetchLoginSession(formData) {
+  return fetch(`${ORIGIN}current-user/login-session`, {
+    method: "POST",
+    credentials: "include",
+    body: formData
+  }).then(response => response.json())
+    .then(responseJSON => {
+      const { success } = responseJSON;
+
+      if (!success) {
+        const { message } = responseJSON;
+        throw message;
+      }
+
+      return responseJSON;
+    });
+}
 
 function* sendAuthorizationRequest(action) {
   try {
-    const { email, password } = action.payload;
+    const { payload } = action;
+    const formData = getFormDataFromPayload(payload);
 
-    const response = yield call(fetch, `${ORIGIN}/login`, {
-      method: "POST",
-      credentials: "include",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "multipart/form-data"
-      },
-      body: {
-        email,
-        password
-      }
-    });
+    const response = yield call(fetchLoginSession, formData);
+    const { session_key, user } = response;
 
-    yield console.log(response, response.body);
-
-    yield put(loginRequestSuccess());
-    yield fork(saveUserSession);
-  } catch (error) {
-    yield put(loginRequestFail());
+    yield fork(saveUserSession, session_key);
+    yield put(loginRequestSuccess(user));
+    yield put(push(HOME));
+  } catch (errorMessage) {
+    yield put(loginRequestFail(errorMessage));
   }
 }
 

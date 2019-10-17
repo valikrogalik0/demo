@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   isLoginFetch: false,
-  error: false
+  error: '',
 };
 
 const login = (state = initialState, action) => {
@@ -19,12 +19,13 @@ const login = (state = initialState, action) => {
     case LOGIN_REQUEST_SUCCESS:
       return {
         ...state,
-        isLoginFetch: false
+        isLoginFetch: false,
+        error: '',
       };
     case LOGIN_REQUEST_FAIL:
       return {
         isLoginFetch: false,
-        error: true
+        error: action.payload
       };
     default:
       return state;
